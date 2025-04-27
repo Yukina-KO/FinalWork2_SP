@@ -14,17 +14,17 @@ class HeadHunterAPI(JobAPI):
         """
         Инициализация API-клиента hh.ru.
         """
-        self._base_url: str = "https://api.hh.ru/vacancies"
+        self.__base_url: str = "https://api.hh.ru/vacancies"
 
     def _fetch_from_api(self, params: Dict[str, str | int]) -> List[Dict[str, Any]]:
         """
-        Приватный метод для обращения к API hh.ru.
+        Реализация абстрактного метода для обращения к API hh.ru.
         Args:
             params (Dict[str, str | int]): Параметры запроса.
         Returns:
             List[Dict]: Список словарей-вакансий.
         """
-        response = requests.get(self._base_url, params=params)
+        response = requests.get(self.__base_url, params=params)
         response.raise_for_status()
         response_json: Dict[str, Any] = response.json()
 
@@ -36,7 +36,7 @@ class HeadHunterAPI(JobAPI):
 
     def get_vacancies(self, keyword: str) -> List[Dict]:
         """
-        Получает список вакансий с платформы hh.ru по ключевому слову.
+        Реализация абстрактного метода для получения списка вакансий с hh.ru по ключевому слову.
         Args:
             keyword (str): Ключевое слово для поиска (например, "Python Developer").
         Returns:

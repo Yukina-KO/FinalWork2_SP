@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Dict, List
+from typing import Dict, List, Any
 
 
 class JobAPI(ABC):
@@ -9,7 +9,18 @@ class JobAPI(ABC):
     по ключевому слову.
     Methods:
         get_vacancies(keyword: str) -> List[Dict]: Получает список вакансий по ключевому слову.
+        _fetch_from_api(params: Dict[str, str | int]): Метод для подключения к API
     """
+    @abstractmethod
+    def _fetch_from_api(self, params: Dict[str, str | int]) -> List[Dict[str, Any]]:
+        """
+        Абстрактный метод для запроса к API.
+        Args:
+            params (Dict[str, str | int]): Параметры запроса.
+        Returns:
+            List[Dict[str, Any]]: Список словарей с данными о вакансиях.
+        """
+        pass
 
     @abstractmethod
     def get_vacancies(self, keyword: str) -> List[Dict]:
